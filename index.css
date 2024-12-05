@@ -10,6 +10,39 @@ body {
   user-select: none;
 }
 
+.main-head {
+  width: 90vw;
+  max-width: 450px;
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: space-between;
+}
+
+.head-1 {
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  padding-right: 25px;
+  padding-left: 10px;
+  border-radius: 5px 25px 25px 5px;
+  background-color: darkblue;
+  color: white;
+}
+
+.head-2 {
+  background-color: bisque;
+  align-content: center;
+  justify-content: center;
+}
+
+.head-2 p {
+  font-size: 11px;
+}
+
 #board {
   display: flex;
   flex-wrap: wrap;

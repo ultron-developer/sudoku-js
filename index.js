@@ -1,3 +1,5 @@
+var api_data = null;
+
 var board = document.getElementById("board");
 var selected_tile_id = null;
 
@@ -17,6 +19,8 @@ backspace_btn.addEventListener("click", backspace);
 
 var clear_all_btn = document.getElementById("btn-clear-all");
 clear_all_btn.addEventListener("click", clear_all);
+
+game_start();
 
 // Keyboard key press event listner
 document.addEventListener("keydown", function (event) {
@@ -59,4 +63,16 @@ function unselect_all_tiles() {
   }
   selected_tile_id = this.id;
   this.style.backgroundColor = "Gainsboro";
+}
+
+function game_start() {
+  let file = "https://sudoku-api.vercel.app/api/dosuku";
+  fetch(file)
+    .then((x) => x.text())
+    .then((y) => loaded_data_transfer(y));
+}
+
+function loaded_data_transfer(data) {
+  api_data = JSON.parse(data);
+  console.log(api_data.newboard.grids[0].difficulty);
 }
