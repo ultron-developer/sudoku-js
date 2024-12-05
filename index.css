@@ -61,8 +61,8 @@ body {
   border-radius: 15px;
   border-bottom: 3px solid darkblue;
   padding-bottom: 5px;
-  padding-right: 15px;
-  padding-left: 15px;
+  width: 80px;
+  text-align: center;
 }
 
 #board {
@@ -93,7 +93,7 @@ body {
   border: 1px solid gray;
   align-content: center;
   justify-content: center;
-  font-size: 27px;
+  font-size: 22px;
 }
 
 .digits {
@@ -145,5 +145,9 @@ body {
   width: 90vw;
   max-width: 450px;
   border-radius: 5px;
+  background-color: Gainsboro;
+}
+
+.fixed{
   background-color: Gainsboro;
 }
