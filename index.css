@@ -13,8 +13,10 @@ body {
 #board {
   display: flex;
   flex-wrap: wrap;
-  width: 450px;
-  height: 450px;
+  width: 90vw;
+  max-width: 450px;
+  height: 90vw;
+  max-height: 450px;
   background-color: white;
   margin: 0 auto;
   border: 1px solid gray;
@@ -40,15 +42,18 @@ body {
 }
 
 .digits {
-  margin: 10px auto;
-  width: 440px;
+  margin: 2px auto;
+  width: 80vw;
+  max-width: 400px;
   align-content: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 8px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .btn-css {
+  margin: 5px 0px;
   width: 43px;
   height: 43px;
   display: flex;
@@ -71,7 +76,7 @@ body {
 
 .btn-clear-all {
   background-color: brown;
-  width: 80px;
+  width: 120px;
 }
 
 .btn-validate {
@@ -82,7 +87,8 @@ body {
 .container2 {
   padding: 10px 10px;
   margin: auto;
-  width: 470px;
+  width: 90vw;
+  max-width: 450px;
   border-radius: 5px;
   background-color: Gainsboro;
 }
