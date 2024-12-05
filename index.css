@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&family=Outfit:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", serif;
+  /* font-family: "Itim", cursive;
+  background-color: #eef0f4; */
+  user-select: none;
+}
+
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 450px;
+  height: 450px;
+  background-color: white;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+
+.semi-board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 33.33%;
+  height: 33.33%;
+  border: 1px solid gray;
+}
+
+.tile {
+  display: flex;
+  flex-wrap: wrap;
+  width: 33.33%;
+  height: 33.33%;
+  border: 1px solid gray;
+  align-content: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.digits {
+  margin: 10px auto;
+  width: 440px;
+  align-content: center;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-css {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  border-radius: 5px;
+  background-color: midnightblue;
+  color: white;
+  flex-wrap: wrap;
+  font-size: 25px;
+  align-content: center;
+  justify-content: center;
+}
+
+.btn-css:hover {
+  background-color: black;
+}
+
+.btn-backspace svg {
+  width: 30px;
+}
+
+.btn-clear-all {
+  background-color: brown;
+  width: 80px;
+}
+
+.btn-validate {
+  background-color: darkgreen;
+  width: 120px;
+}
+
+.container2 {
+  padding: 10px 10px;
+  margin: auto;
+  width: 470px;
+  border-radius: 5px;
+  background-color: Gainsboro;
+}
