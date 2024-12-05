@@ -34,13 +34,35 @@ body {
 }
 
 .head-2 {
-  background-color: bisque;
   align-content: center;
   justify-content: center;
+  background-color: darkblue;
+  color: white;
+  padding-left: 25px;
+  padding-right: 10px;
+  border-radius: 25px 5px 5px 25px;
 }
 
 .head-2 p {
   font-size: 11px;
+}
+
+.head-2 h6 {
+  background-color: white;
+  border-radius: 5px;
+  color: red;
+  width: 75px;
+}
+
+.timer {
+  align-content: end;
+  margin: 0px;
+  color: red;
+  border-radius: 15px;
+  border-bottom: 3px solid darkblue;
+  padding-bottom: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 #board {
