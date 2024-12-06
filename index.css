@@ -20,6 +20,10 @@ body {
   justify-content: space-between;
 }
 
+#heading-1{
+  padding-top: 3px;
+}
+
 .head-1 {
   height: 50px;
   display: flex;
@@ -31,16 +35,11 @@ body {
   border-radius: 5px 25px 25px 5px;
   background-color: darkblue;
   color: white;
+  width: 80%;
 }
 
 .head-2 {
-  align-content: center;
-  justify-content: center;
-  background-color: darkblue;
-  color: white;
   padding-left: 25px;
-  padding-right: 10px;
-  border-radius: 25px 5px 5px 25px;
 }
 
 .head-2 p {
@@ -55,13 +54,13 @@ body {
 }
 
 .timer {
-  align-content: end;
+  font-size: 15px;
+  background: darkblue;
+  align-content: center;
   margin: 0px;
-  color: red;
-  border-radius: 15px;
-  border-bottom: 3px solid darkblue;
-  padding-bottom: 5px;
-  width: 80px;
+  color: white;
+  border-radius: 25px;
+  width: 50px;
   text-align: center;
 }
 
