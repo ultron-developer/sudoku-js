@@ -1,3 +1,10 @@
+window.addEventListener("beforeunload", (evt) => {
+  // Recommended
+  evt.preventDefault();
+  // Included for legacy support, e.g. Chrome/Edge < 119
+  evt.returnValue = true;
+});
+
 var api_data = null;
 
 var board = document.getElementById("board");
@@ -10,6 +17,19 @@ for (let i = 0; i < all_tiles.length; i++) {
   all_tiles[i].innerHTML = "";
 }
 
+let hour = 0;
+let minute = 0;
+let second = 0;
+let count = 0;
+
+// Modals
+
+var Modal_clear_all = document.getElementById("clear-all-modal-popup");
+
+var Modal_start = document.getElementById("start-modal-popup");
+
+// Buttons
+
 const all_digit_buttons = document.getElementsByClassName("btn-digit");
 for (let k = 0; k < all_digit_buttons.length; k++) {
   all_digit_buttons[k].addEventListener("click", enter_digit);
@@ -19,9 +39,18 @@ var backspace_btn = document.getElementById("btn-backspace");
 backspace_btn.addEventListener("click", backspace);
 
 var clear_all_btn = document.getElementById("btn-clear-all");
-clear_all_btn.addEventListener("click", clear_all);
+clear_all_btn.addEventListener("click", clear_all_btn_clicked);
 
-game_start();
+var clearall_yes = document.getElementById("btn-clearall-yes");
+clearall_yes.addEventListener("click", clear_all);
+
+var clearall_cancel = document.getElementById("btn-clearall-cancel");
+clearall_cancel.addEventListener("click", function () {
+  Modal_clear_all.style.display = "none";
+});
+
+var Start_btn = document.getElementById("btn-start");
+Start_btn.addEventListener("click", game_start);
 
 // Keyboard key press event listner
 document.addEventListener("keydown", function (event) {
@@ -53,6 +82,10 @@ function backspace() {
   }
 }
 
+function clear_all_btn_clicked() {
+  Modal_clear_all.style.display = "block";
+}
+
 function clear_all() {
   if (selected_tile_id != null) {
     for (let i = 0; i < all_tiles.length; i++) {
@@ -61,6 +94,7 @@ function clear_all() {
       }
     }
   }
+  Modal_clear_all.style.display = "none";
 }
 
 function unselect_all_tiles() {
@@ -76,6 +110,7 @@ function unselect_all_tiles() {
 }
 
 function game_start() {
+  Modal_start.style.display = "none";
   let file = "https://sudoku-api.vercel.app/api/dosuku";
   fetch(file)
     .then((x) => x.text())
@@ -86,16 +121,17 @@ function loaded_data_transfer(data) {
   api_data = JSON.parse(data);
   change_level_heading(api_data.newboard.grids[0].difficulty);
   assign_initial_digits(api_data.newboard.grids[0].value);
+  start_timer();
 }
 
 function change_level_heading(level) {
   level_header.innerText = level;
   if (level == "Easy") {
-    level_header.style.color = "Green";
+    level_header.style.backgroundColor = "Green";
   } else if (level == "Medium") {
-    level_header.style.color = "Orange";
+    level_header.style.backgroundColor = "#db9107";
   } else {
-    level_header.style.color = "red";
+    level_header.style.backgroundColor = "red";
   }
 }
 
@@ -114,17 +150,10 @@ function hasClass(element, cls) {
   return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
 }
 
-let startBtn = document.getElementById("start");
-let stopBtn = document.getElementById("stop");
-let resetBtn = document.getElementById("reset");
-
-let hour = 0;
-let minute = 0;
-let second = 0;
-let count = 0;
-
-timer = true;
-stopWatch();
+function start_timer() {
+  timer = true;
+  stopWatch();
+}
 
 // stopBtn.addEventListener("click", function () {
 //   timer = false;

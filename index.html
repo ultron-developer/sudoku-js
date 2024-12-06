@@ -25,10 +25,10 @@
         <div class="head-1">
           <h2 id="heading-1" class="text-center d-inline-block m-0">Sudoku</h2>
         </div>
-        <h6 id="timer" class="timer">Timer:00</h6>
+        <h6 id="timer" class="timer">00:00</h6>
         <div class="head-2 text-center">
           <p class="m-0">Level</p>
-          <h6 class="m-0" id="level-header">-</h6>
+          <h6 class="m-0 text-white" id="level-header">-</h6>
         </div>
       </div>
       <div id="board">
@@ -166,6 +166,36 @@
           <!-- <div class="btn-validate">Reveal</div> -->
           <div class="btn-clear-all btn-css" id="btn-clear-all">Clear all</div>
           <div class="btn-validate btn-css">Check</div>
+        </div>
+      </div>
+    </div>
+    <div id="clear-all-modal-popup" class="modal">
+      <div class="modal-content">
+        <h4 id="msg-show">Are you sure you want to clear all numbers?</h4>
+        <hr />
+        <div>
+          <button
+            id="btn-clearall-cancel"
+            class="modal-buttons btn btn-secondary"
+          >
+            Cancel
+          </button>
+          <button id="btn-clearall-yes" class="modal-buttons btn btn-danger">
+            Yes, delete all
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="start-modal-popup" class="modal" style="display: block;">
+      <div class="modal-content">
+        <h2>Sudoku</h2>
+        <h6>Developed by Ultron</h6>
+        <hr />
+        <div>
+          <button id="btn-start" class="modal-buttons btn btn-success">
+            Let's Play
+          </button>
         </div>
       </div>
     </div>
