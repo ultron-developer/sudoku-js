@@ -6,6 +6,7 @@ window.addEventListener("beforeunload", (evt) => {
 });
 
 var api_data = null;
+var errors = null;
 
 var board = document.getElementById("board");
 var selected_tile_id = null;
@@ -52,6 +53,9 @@ clearall_cancel.addEventListener("click", function () {
 var Start_btn = document.getElementById("btn-start");
 Start_btn.addEventListener("click", game_start);
 
+var Check_btn = document.getElementById("btn-final-check");
+Check_btn.addEventListener("click", final_validation);
+
 // Keyboard key press event listner
 document.addEventListener("keydown", function (event) {
   if (selected_tile_id != null) {
@@ -87,25 +91,33 @@ function clear_all_btn_clicked() {
 }
 
 function clear_all() {
-  if (selected_tile_id != null) {
-    for (let i = 0; i < all_tiles.length; i++) {
-      if (!all_tiles[i].classList.contains("fixed")) {
-        all_tiles[i].innerHTML = "";
-      }
+  for (let i = 0; i < all_tiles.length; i++) {
+    if (!all_tiles[i].classList.contains("fixed")) {
+      all_tiles[i].innerHTML = "";
     }
   }
+
   Modal_clear_all.style.display = "none";
 }
 
 function unselect_all_tiles() {
+  change_bgcolor_of_all_tiles_gray();
   if (selected_tile_id != null) {
     document.getElementById(selected_tile_id).style.backgroundColor = "white";
   }
   if (!this.classList.contains("fixed")) {
     selected_tile_id = this.id;
-    this.style.backgroundColor = "#f2edaa";
+    this.style.backgroundColor = "#aaf7ff";
   } else {
     selected_tile_id = null;
+  }
+}
+
+function change_bgcolor_of_all_tiles_gray() {
+  for (let i = 0; i < all_tiles.length; i++) {
+    if (!all_tiles[i].classList.contains("fixed")) {
+      all_tiles[i].style.backgroundColor = "white";
+    }
   }
 }
 
@@ -146,9 +158,33 @@ function assign_initial_digits(numbers) {
   }
 }
 
-function hasClass(element, cls) {
-  return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
+function final_validation() {
+  solution = api_data.newboard.grids[0].solution;
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (!document.getElementById(i + "-" + j).classList.contains("fixed")) {
+        if (document.getElementById(i + "-" + j).innerText == "") {
+          document.getElementById(i + "-" + j).style.backgroundColor =
+            "#fffaaa";
+          errors++;
+        } else if (
+          solution[i][j] != document.getElementById(i + "-" + j).innerText
+        ) {
+          document.getElementById(i + "-" + j).style.backgroundColor =
+            "#ffb9aa";
+          errors++;
+        } else {
+          document.getElementById(i + "-" + j).style.backgroundColor =
+            "#bfffaa";
+        }
+      }
+    }
+  }
 }
+
+// function hasClass(element, cls) {
+//   return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
+// }
 
 function start_timer() {
   timer = true;
