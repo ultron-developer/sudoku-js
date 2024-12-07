@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
 }
 
-#heading-1{
+#heading-1 {
   padding-top: 3px;
 }
 
@@ -138,6 +138,10 @@ body {
   width: 120px;
 }
 
+#btn-play-again {
+  width: 150px;
+}
+
 .container2 {
   padding: 5px;
   margin: auto;
@@ -148,7 +152,7 @@ body {
 }
 
 .fixed {
-  background-color: Gainsboro;
+  background-color: Gainsboro !important;
 }
 
 .modal {

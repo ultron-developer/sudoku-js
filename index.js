@@ -6,7 +6,7 @@ window.addEventListener("beforeunload", (evt) => {
 });
 
 var api_data = null;
-var errors = null;
+var errors = 0;
 
 var board = document.getElementById("board");
 var selected_tile_id = null;
@@ -22,6 +22,10 @@ let hour = 0;
 let minute = 0;
 let second = 0;
 let count = 0;
+
+var div_no1 = document.getElementById("1st-two-btn");
+var div_no2 = document.getElementById("2nd-two-btn");
+div_no2.style.display = "none";
 
 // Modals
 
@@ -52,11 +56,17 @@ clearall_cancel.addEventListener("click", function () {
   Modal_clear_all.style.display = "none";
 });
 
+var timer_heading = document.getElementById("timer");
+timer_heading.addEventListener("dblclick", auto_fill);
+
 var Start_btn = document.getElementById("btn-start");
 Start_btn.addEventListener("click", game_start);
 
 var Check_btn = document.getElementById("btn-final-check");
 Check_btn.addEventListener("click", final_validation);
+
+var Play_again_btn = document.getElementById("btn-play-again");
+Play_again_btn.addEventListener("click", play_again);
 
 // Keyboard key press event listner
 document.addEventListener("keydown", function (event) {
@@ -126,11 +136,27 @@ function change_bgcolor_of_all_tiles_gray() {
 }
 
 function game_start() {
+  div_no1.style.display = "block";
+  div_no2.style.display = "none";
   Modal_start.style.display = "none";
   let file = "https://sudoku-api.vercel.app/api/dosuku";
   fetch(file)
     .then((x) => x.text())
     .then((y) => loaded_data_transfer(y));
+}
+
+function play_again() {
+  for (let i = 0; i < all_tiles.length; i++) {
+    all_tiles[i].style.backgroundColor = "white";
+    all_tiles[i].classList.remove("fixed");
+    all_tiles[i].innerHTML = "";
+  }
+  timer = false;
+  hour = 0;
+  minute = 0;
+  second = 0;
+  count = 0;
+  game_start();
 }
 
 function loaded_data_transfer(data) {
@@ -162,8 +188,8 @@ function assign_initial_digits(numbers) {
   }
 }
 function final_validation() {
+  errors = 0;
   solution = api_data.newboard.grids[0].solution;
-  console.log(solution);
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (!document.getElementById(i + "-" + j).classList.contains("fixed")) {
@@ -185,33 +211,19 @@ function final_validation() {
     }
   }
   if (errors == 0) {
+    timer = false;
+    div_no1.style.display = "none";
+    div_no2.style.display = "block";
+    //document.getElementById("winning-msg").innerText = "You have solved sudoku in " + minute + " minutes & " + second + " seconds."
+    document.getElementById("min_str").innerText = minute;
+    document.getElementById("sec_str").innerText = second;
   }
 }
-
-// function hasClass(element, cls) {
-//   return (" " + element.className + " ").indexOf(" " + cls + " ") > -1;
-// }
 
 function start_timer() {
   timer = true;
   stopWatch();
 }
-
-// stopBtn.addEventListener("click", function () {
-//   timer = false;
-// });
-
-// resetBtn.addEventListener("click", function () {
-//   timer = false;
-//   hour = 0;
-//   minute = 0;
-//   second = 0;
-//   count = 0;
-//   document.getElementById("hr").innerHTML = "00";
-//   document.getElementById("min").innerHTML = "00";
-//   document.getElementById("sec").innerHTML = "00";
-//   document.getElementById("count").innerHTML = "00";
-// });
 
 function stopWatch() {
   if (timer) {
@@ -253,5 +265,16 @@ function stopWatch() {
     //document.getElementById("timer").innerHTML = secString + ":" + countString;
 
     setTimeout(stopWatch, 10);
+  }
+}
+
+function auto_fill() {
+  answer = api_data.newboard.grids[0].solution;
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (answer[i][j] != 0) {
+        document.getElementById(i + "-" + j).innerHTML = answer[i][j];
+      }
+    }
   }
 }
