@@ -1,3 +1,7 @@
+document.documentElement
+  .requestFullscreen()
+  .then(() => screen.orientation.lock("portrait"));
+
 window.addEventListener("beforeunload", (evt) => {
   // Recommended
   evt.preventDefault();
