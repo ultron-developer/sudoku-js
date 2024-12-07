@@ -1,7 +1,3 @@
-document.documentElement
-  .requestFullscreen()
-  .then(() => screen.orientation.lock("portrait"));
-
 window.addEventListener("beforeunload", (evt) => {
   // Recommended
   evt.preventDefault();
@@ -51,6 +47,8 @@ clearall_yes.addEventListener("click", clear_all);
 
 var clearall_cancel = document.getElementById("btn-clearall-cancel");
 clearall_cancel.addEventListener("click", function () {
+  change_bgcolor_of_all_tiles_gray();
+  start_timer();
   Modal_clear_all.style.display = "none";
 });
 
@@ -91,16 +89,18 @@ function backspace() {
 }
 
 function clear_all_btn_clicked() {
+  timer = false;
   Modal_clear_all.style.display = "block";
 }
 
 function clear_all() {
+  start_timer();
   for (let i = 0; i < all_tiles.length; i++) {
     if (!all_tiles[i].classList.contains("fixed")) {
       all_tiles[i].innerHTML = "";
     }
   }
-
+  change_bgcolor_of_all_tiles_gray();
   Modal_clear_all.style.display = "none";
 }
 
@@ -161,9 +161,9 @@ function assign_initial_digits(numbers) {
     }
   }
 }
-
 function final_validation() {
   solution = api_data.newboard.grids[0].solution;
+  console.log(solution);
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (!document.getElementById(i + "-" + j).classList.contains("fixed")) {
@@ -183,6 +183,8 @@ function final_validation() {
         }
       }
     }
+  }
+  if (errors == 0) {
   }
 }
 
